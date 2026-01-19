@@ -27,6 +27,24 @@ Streamlit-based interactive dashboard.
 - models/ – Pre-trained ML models (.joblib / .pkl)
 - screenshots/-(dashboard.png,sentimentoutput.png,topic_modelling.png,summary.png)
 
+
+## Screenshots
+
+### Dashboard Interface
+![Dashboard Interface](screenshots/dashboard.png)
+
+### Sentiment Analysis and Keywords
+![Sentiment Analysis and Keywords](screenshots/sentiment%20analysis%20and%20keywords.png)
+
+### Topic Modeling Results
+![Topic Modeling Results](screenshots/topic_modeling.png)
+
+### Text Summarization Output
+![Text Summarization Output](screenshots/summary.png)
+
+### Summarization Insight
+![Summarization Insight](screenshots/summarization%20insight.png)
+
 ## How to Run
 ```bash
 pip install -r requirements.txt
