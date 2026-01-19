@@ -1,0 +1,10 @@
+streamlit
+PyPDF2
+numpy
+matplotlib
+wordcloud
+scikit-learn
+joblib
+nltk
+transformers
+torch
