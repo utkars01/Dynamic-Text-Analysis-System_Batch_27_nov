@@ -18,13 +18,13 @@ A dynamic text analysis system built with **Streamlit** that allows users to upl
 
 ---
 **UI Overview**
-![UI Overview](image.png)
+![UI Overview](Dynamic-Text-Analysis-System_Batch_27_nov\text_analysis_platform\assets\ui_overview.png)
 **Sentiment Analysis**
-![Sentiment Analysis](image-1.png)
+![Sentiment Analysis](Dynamic-Text-Analysis-System_Batch_27_nov\text_analysis_platform\assets\sentiment_ui.png)
 **Topic modeling**
-![Topic Modeling](image-2.png)
+![Topic Modeling](Dynamic-Text-Analysis-System_Batch_27_nov\text_analysis_platform\assets\topic_modeling_ui.png)
 **Summary and Insights**
-![Summary and Insights](image-3.png)
+![Summary and Insights](Dynamic-Text-Analysis-System_Batch_27_nov\text_analysis_platform\assets\summary_insights_ui.png)
 
 ## 📖 Usage
 - Upload a file or paste text in the input box.
@@ -38,16 +38,39 @@ A dynamic text analysis system built with **Streamlit** that allows users to upl
 
 ---
 
+
+## 📂 Project Structure
+
+text_analysis_platform/ 
+ ├── app.py                  # Streamlit app 
+ ├── reporting.py            
+ ├── summarizer.py           
+ ├── validation.py           # Input checks 
+ ├── sentiment_analysis.ipynb 
+ ├── topic_modeling.ipynb 
+ ├── requirements.txt        # Dependencies 
+ ├── assets/                 
+ +     
+
+
 ## 🛠️ Installation
 
 1. Clone the repo:
    ```bash
    git clone https://github.com/springboard5678x/Dynamic-Text-Analysis-System_Batch_27_nov.git
    cd Dynamic-Text-Analysis-System_Batch_27_nov
-- Install dependencies:
+2. Install dependencies:
 pip install -r requirements.txt
-- 
-Run the App
+
+3. Download spaCy model:
+python -m spacy download en_core_web_sm
+
+4. Download NLTK stopwords (in Python):
+import nltk
+nltk.download("stopwords")
+
+
+▶️ Run the App
 streamlit run text_analysis_platform/app.py
 
 📝 License
