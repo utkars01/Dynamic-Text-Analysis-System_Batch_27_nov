@@ -16,13 +16,13 @@ A dynamic Streamlit-based text analysis system that allows users to upload or pa
 
 ---
 **UI Overview**
-![UI Overview](text_analysis_platform\assets\ui_overview.png)
+![UI Overview](text_analysis_platform/assets/ui_overview.png)
 **Sentiment Analysis**
-![Sentiment Analysis](text_analysis_platform\assets\sentiment_ui.png)
+![Sentiment Analysis](text_analysis_platform/assets/sentiment_ui.png)
 **Topic modeling**
-![Topic Modeling](text_analysis_platform\assets\topic_modeling_ui.png)
+![Topic Modeling](text_analysis_platform/assets/topic_modeling_ui.png)
 **Summary and Insights**
-![Summary and Insights](text_analysis_platform\assets\summary_insights_ui.png)
+![Summary and Insights](text_analysis_platform/assets/summary_insights_ui.png)
 
 ## 📖 Usage
 - Upload a file or paste text in the input box.
