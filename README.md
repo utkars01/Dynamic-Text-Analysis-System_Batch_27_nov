@@ -50,6 +50,7 @@ text_analysis_platform/
 └── topic_modeling.ipynb    
 ```   
     
+## Dataset used - Amazon Fine Food reviews from kaggle
 
 # 🛠️ Installation & Setup
 Follow these steps to run the project locally:
@@ -76,6 +77,15 @@ Launch the dashboard using Streamlit:
 ```bash
 streamlit run app.py
 ```
+
+## Use cases
+1. Brand Monitoring: Quickly track if customer sentiment is trending up or down.
+2. Menu Engineering: Identify which dishes are "hits" and which ones need recipe changes.
+3. Efficiency for Managers: Save hours by reading a single AI summary instead of 500 individual reviews.
+4. Stakeholder Reporting: Create professional PDF/Word reports for owners or investors with one click.
+5. Crisis Detection: Instantly flag negative words like "spoiled" or "rude" before they hurt your reputation.
+
+Marketing Insights: Find glowing customer quotes to use as testimonials on social media
 ## 🤝 Contributing
 1. Fork the Project.
 2. Create a Feature Branch:
