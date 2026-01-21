@@ -1,0 +1,493 @@
+<!-- templates/upload.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Narrative Nexus</title>
+  <link rel="icon" type="image/png" href="https://img.icons8.com/fluency/48/asterisk.png">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+
+      background-color: #0F0C1B;
+      font-family: 'Space Mono', monospace;
+      color: #B69AFF;
+      
+    }
+
+    h1 {
+      color: #B69AFF;
+      letter-spacing: 1px;
+    }
+
+    .list-group-item {
+      background: rgba(15, 12, 27, 0.85);
+      border: 1px solid rgba(182, 154, 255, 0.25);
+      border-radius: 12px;
+      margin-bottom: 14px;
+      padding: 18px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .list-group-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 20px rgba(173, 0, 200, 0.25);
+    }
+
+    .btn-outline-primary {
+      color: #B69AFF;
+      border-color: #AD00C8;
+    }
+
+    .btn-outline-primary:hover {
+      background: #AD00C8;
+      border-color: #AD00C8;
+      color: #000;
+    }
+
+    .text-success {
+      color: #9EFFC1 !important;
+    }
+
+    .text-danger {
+      color: #FF8A8A !important;
+    }
+        /* HERO SECTION */
+    #hero {
+      position: relative;
+      width: 100%;
+      height: 100vh !important;
+      background: #000;
+      overflow: hidden;
+    }
+
+    /* Unicorn wrapper */
+    #unicorn-wrapper {
+      position: absolute;
+      inset: 0;
+    }
+
+    /* Override Unicorn fixed sizing */
+    .unicorn-canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    /* Smooth visual handoff to app */
+    .hero-fade {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 120px;
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0),
+        #0F0C1B
+      );
+    }
+    .upload-section {
+      position: relative;
+      max-width: 720px;
+      margin: 120px auto 80px auto;
+      padding: 36px;
+      background: rgba(15, 12, 27, 0.96);
+      border-radius: 22px;
+      border: 1px solid rgba(182, 154, 255, 0.25);
+      box-shadow:
+        0 20px 60px rgba(173, 0, 200, 0.25),
+        inset 0 0 0 1px rgba(182, 154, 255, 0.08);
+    }
+    .btn-primary {
+      background: #B69AFF;
+      border: none;
+      color: #0F0C1B;
+    }
+
+    .btn-primary:hover {
+      background: #AD00C8;
+      color: white;
+    }
+    .form-text {
+      color: #9d9d9d;
+    }
+    .mb-4 {
+      border: 0px;
+    }
+    .intro-section {
+      background: #0F0C1B;
+      padding: 80px 20px 60px;
+    }
+
+    .intro-content {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .intro-content h2 {
+      font-size: 2.4rem;
+      margin-bottom: 20px;
+      color: #B69AFF;
+    }
+
+    .intro-lead {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      max-width: 720px;
+      margin-bottom: 50px;
+      color: rgba(182, 154, 255, 0.9);
+    }
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    .intro-card {
+      background: rgba(0, 0, 0, 0.55);
+      border: 1px solid rgba(182, 154, 255, 0.2);
+      border-radius: 18px;
+      padding: 26px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .intro-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(173, 0, 200, 0.25);
+    }
+
+    .intro-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 12px;
+      color: #B69AFF;
+    }
+
+    .intro-card p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: rgba(182, 154, 255, 0.85);
+    }
+
+    .intro-footnote {
+      margin-top: 40px;
+      font-size: 0.85rem;
+      opacity: 0.75;
+    }
+
+    .usecase-section {
+      background: rgba(0, 0, 0, 0.55);
+      padding: 70px 20px 60px;
+
+
+    }
+
+    .usecase-content {
+      max-width: 1100px;
+      margin: 0 auto;
+
+    }
+
+    .usecase-content h2 {
+      color: #B69AFF;
+      font-size: 2.2rem;
+      margin-bottom: 36px;
+    }
+
+    .usecase-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 26px;
+    }
+
+    .usecase-card {
+      background: #0F0C1B;
+      border: 1px solid rgba(182, 154, 255, 0.18);
+      border-radius: 18px;
+      padding: 26px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .usecase-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 30px rgba(173, 0, 200, 0.22);
+    }
+
+    .usecase-card h3 {
+      color: #B69AFF;
+      font-size: 1.05rem;
+      margin-bottom: 10px;
+    }
+
+    .usecase-card p {
+      color: rgba(182, 154, 255, 0.85);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+
+    .upload-hint {
+      text-align: center;
+      margin-bottom: 16px;
+      font-size: 0.9rem;
+      opacity: 0.75;
+      padding-top: 100px;
+    }
+
+    .site-footer {
+      background: radial-gradient(
+        circle at bottom center,
+        #AD00C8 5%,
+        #441700 100%
+      );
+      padding: 50px 20px 36px;
+      margin-top: 80px;
+      color: #ffffff;
+      font-family: "Space Mono", monospace;
+      border-top: #ffffff 1px solid;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 30px;
+    }
+
+    .footer-brand h3 {
+      font-size: 1.25rem;
+      margin-bottom: 8px;
+    }
+
+    .footer-brand p {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      opacity: 0.9;
+      max-width: 420px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-links a {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.9rem;
+      opacity: 0.85;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      opacity: 1;
+      transform: translateX(3px);
+    }
+
+    .footer-meta {
+      grid-column: 1 / -1;
+      margin-top: 24px;
+      font-size: 0.75rem;
+      opacity: 0.75;
+    }
+
+
+
+
+  </style>
+
+
+
+
+</head>
+<body class="bg-light">
+
+  <section id="hero">
+    <div id="unicorn-wrapper">
+      <div
+        data-us-project="e3Vh1SKzUypWfaZbAngy"
+        class="unicorn-canvas"
+      ></div>
+      
+
+    </div>
+  </section>
+
+
+  <div class="hero-fade" >
+
+      <div style="background-color: #0F0C1B; min-height: 500px; margin-top: 120px;">
+        <div>
+          <section class="intro-section">
+            <div class="intro-content">
+              <h2 style="font-size: 50pt; ">UNDERSTAND THE STORY BEHIND THE TEXT</h2>
+
+              <p class="intro-lead">
+                Narrative Nexus helps you move beyond raw documents and datasets.
+                Upload text, docx or CSV files and uncover the underlying themes, sentiment,
+                and meaning — all in one coherent view.
+              </p>
+
+              <div class="intro-grid">
+                <div class="intro-card">
+                  <h3 style="font-weight: bold;">🧠 TOPIC INTELLIGENCE</h3>
+                  <p>
+                    Discover what your documents are really about.
+                    Automatically identify dominant themes and how strongly they appear
+                    across the entire corpus.
+                  </p>
+                </div>
+
+                <div class="intro-card">
+                  <h3 style="font-weight: bold;">📊 SENTIMENT & STANCE</h3>
+                  <p>
+                    Measure emotional tone and polarity using models trained on
+                    real-world social discourse. Understand not just what is said,
+                    but how it is framed.
+                  </p>
+                </div>
+
+                <div class="intro-card">
+                  <h3 style="font-weight: bold;">✍️ HUMAN READABLE SUMMARIES</h3>
+                  <p>
+                    Generate both extractive and abstractive summaries optimized
+                    for long-form narratives, reports, and news-style content.
+                  </p>
+                </div>
+              </div>
+
+              <p class="intro-footnote">
+                Built for analysts, researchers, journalists, and anyone who needs to
+                make sense of complex textual data — fast.
+              </p>
+            </div>
+          </section>
+
+        </div>
+        <div>
+          <img 
+            src="{{ url_for('static', filename='stock/graphics.png') }}" 
+            alt="Narrative visualization"
+            class="intro-visual"
+            style="height: 400px;"
+          />
+        </div>
+        <div>
+          <section class="usecase-section">
+            <div class="usecase-content">
+
+              <h2>Designed for narrative-heavy analysis</h2>
+
+              <div class="usecase-grid">
+                <div class="usecase-card">
+                  <h3 style="font-weight: bold;">News & Media</h3>
+                  <p>
+                    Explore how topics and sentiment evolve across articles,
+                    coverage, or reporting styles.
+                  </p>
+                </div>
+
+                <div class="usecase-card">
+                  <h3 style="font-weight: bold;">Research & Academia</h3>
+                  <p>
+                    Summarize and structure large text corpora while preserving
+                    context and thematic depth.
+                  </p>
+                </div>
+
+                <div class="usecase-card">
+                  <h3 style="font-weight: bold;">Public Discourse</h3>
+                  <p>
+                    Analyze opinion-driven datasets such as social commentary,
+                    political discussion, or open forums.
+                  </p>
+                </div>
+
+                <div class="usecase-card">
+                  <h3 style="font-weight: bold;">Market & Competitive Insight</h3>
+                  <p>
+                    Extract signal from qualitative data — reports, feedback,
+                    narratives — without losing nuance.
+                  </p>
+                </div>
+              </div>
+
+            </div>
+          </section>
+
+
+        </div>
+        <p class="upload-hint">
+          Start by uploading a document to generate your analysis.
+        </p>
+        <section class="upload-section" style = "opacity: 100%; margin-top: 0px;">
+          <div class="card-body"style = "color: white;">
+            <form method="post" action="{{ url_for('routes.handle_upload') }}" enctype="multipart/form-data">
+              <div class="mb-3">
+                <label for="files" class="form-label">Select files (multiple allowed)</label>
+                <input class="form-control" type="file" id="files" name="files" multiple>
+                <div class="form-text">Allowed: .txt, .csv, .docx. Max file size: 10 MB each.</div>
+              </div>
+
+              <div class="mb-3">
+                <label for="text_column" class="form-label">CSV text column name (optional)</label>
+                <input class="form-control" type="text" id="text_column" name="text_column" placeholder="text (default)">
+                <div class="form-text">If uploading CSVs, specify which column contains text. Default: <code>text</code>.</div>
+              </div>
+
+              <button type="submit" class="btn btn-primary">Upload</button>
+
+
+            </form>
+          </div>
+        </section>
+        <div class="site-footer">
+          <div class="footer-inner">
+
+            <div class="footer-brand">
+              <h3>AI Narrative Nexus</h3>
+              <p>
+                A platform for structured understanding of narrative-heavy data.
+              </p>
+              <p><a target="_blank" href="https://icons8.com/icon/6OsLpx405oJP/asterisk" style="color: white;">Asterisk</a> icon by <a target="_blank" href="https://icons8.com" style="color: white;">Icons8</a>
+</p>
+                          </div>
+
+            <div class="footer-links">
+              <a href="#">About</a>
+              <a href="#">Documentation</a>
+              <a href="#">Privacy</a>
+              <a href="#">Contact</a>
+            </div>
+
+            <div class="footer-meta">
+              <span>© 2026 AI Narrative Nexus</span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+  (function(){
+    if (!window.UnicornStudio) {
+      window.UnicornStudio = { isInitialized: false };
+      var script = document.createElement("script");
+      script.src = "https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v2.0.2/dist/unicornStudio.umd.js";
+      script.onload = function () {
+        if (!window.UnicornStudio.isInitialized) {
+          UnicornStudio.init();
+          window.UnicornStudio.isInitialized = true;
+        }
+      };
+      document.body.appendChild(script);
+    }
+  })();
+  </script>
+
+</body>
+</html>

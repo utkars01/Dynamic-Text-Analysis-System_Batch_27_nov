@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Narrative Nexus – Dashboard</title>
+    <link rel="icon" type="image/png" href="https://img.icons8.com/fluency/48/asterisk.png">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fa;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 30px auto;
+        }
+        .card {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        }
+        h1, h2 {
+            margin-top: 0;
+        }
+        .meta {
+            color: #9d9d9d;
+            font-size: 18px;
+        }
+        .summary-toggle {
+            margin-bottom: 10px;
+        }
+        .summary-toggle button {
+            margin-right: 10px;
+            padding: 6px 12px;
+            cursor: pointer;
+        }
+        .summary-text {
+            line-height: 1.6;
+        }
+        .chart-container {
+            width: 100%;
+            max-width: 700px;
+            margin: auto;
+        }
+        img.wordcloud {
+            max-width: 100%;
+            display: block;
+            margin: auto;
+        }
+        body {
+        background: radial-gradient(
+            circle at top center,
+            #AD00C8 1%,
+            #441700 60%,
+            #0F0C1B 75%,
+            #000000 100%
+        );
+        font-family: 'Space Mono', monospace;
+        color: white;
+        }
+
+        h1 {
+        color: white;
+        letter-spacing: 1px;
+        }
+
+        h2{
+            color: white
+        }
+
+        .list-group-item {
+        background: rgba(15, 12, 27, 0.85);
+        border: 1px solid rgba(182, 154, 255, 0.25);
+        border-radius: 12px;
+        margin-bottom: 14px;
+        padding: 18px;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .list-group-item:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 0 20px rgba(173, 0, 200, 0.25);
+        }
+
+        .btn-outline-primary {
+        color: #B69AFF;
+        border-color: #AD00C8;
+        }
+
+        .btn-outline-primary:hover {
+        background: #AD00C8;
+        border-color: #AD00C8;
+        color: #000;
+        }
+
+        .text-success {
+        color: #9EFFC1 !important;
+        }
+
+        .text-danger {
+        color: #FF8A8A !important;
+        }
+        body {
+        background: radial-gradient(
+            circle at top center,
+            #AD00C8 0%,
+            #441700 50%,
+            #0F0C1B 75%,
+            #000000 100%
+        );
+        color: #B69AFF;
+        font-family: 'Space Mono', monospace;
+        min-height: 100vh;
+        max-width: 100vw;
+        }
+
+        .card {
+        background: rgba(15, 12, 27, 0.9);
+        border: 1px solid rgba(182, 154, 255, 0.2);
+        border-radius: 16px;
+        box-shadow: 0 0 40px rgba(173, 0, 200, 0.15);
+        }
+        
+
+        .insights-row {
+            display: flex;
+            gap: 32px;
+            width: 100%;
+        }
+
+        .chart-box {
+            flex: 1 1 0;
+            min-width: 0;              /* 🔴 THIS IS CRITICAL */
+            height: 420px;
+            position: relative;
+
+            background: rgba(15, 12, 27, 0.6);
+            border: 1px solid rgba(182, 154, 255, 0.15);
+            border-radius: 14px;
+            padding: 16px;
+        }
+
+        .chart-box canvas {
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        .summary-tabs {
+            display: inline-flex;
+            gap: 6px;
+            padding: 6px;
+            margin-bottom: 18px;
+
+            background: rgba(15, 12, 27, 0.6);
+            border-radius: 12px;
+        }
+
+        .summary-tab {
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+            letter-spacing: 0.4px;
+
+            padding: 10px 18px;
+            border-radius: 8px;
+
+            background: transparent;
+            border: none;
+            color: rgba(182, 154, 255, 0.7);
+
+            cursor: pointer;
+            transition: 
+                background 0.25s ease,
+                color 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+        .summary-tab:hover {
+            color: #B69AFF;
+        }
+
+        .summary-tab.active {
+            background: linear-gradient(
+                135deg,
+                #AD00C8,
+                #441700
+            );
+            color: #FFFFFF;
+            box-shadow:
+                0 0 0 1px rgba(182, 154, 255, 0.25),
+                0 0 18px rgba(173, 0, 200, 0.25);
+        }
+
+        .summary-divider {
+            height: 1px;
+            margin-bottom: 16px;
+            background: linear-gradient(
+                to right,
+                transparent,
+                rgba(182, 154, 255, 0.3),
+                transparent
+            );
+        }
+
+        .insights-row {
+            display: flex;
+            gap: 32px;
+            width: 100%;
+        }
+
+        .chart-column {
+            flex: 1 1 0;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chart-title {
+            font-size: 18px;
+            color: white;
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        .chart-box {
+            flex: 1;
+            position: relative;
+            height: 420px;
+
+            background: rgba(15, 12, 27, 0.6);
+            border: 1px solid rgba(182, 154, 255, 0.15);
+            border-radius: 14px;
+            padding: 16px;
+        }
+
+        .chart-box canvas {
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+
+        .download-report-btn {
+            font-family: "Space Mono", monospace;
+            font-size: 14px;
+            color: white;
+
+            background: linear-gradient(
+                135deg,
+                rgba(173, 0, 200, 0.25),
+                rgba(68, 23, 0, 0.35)
+            );
+
+            border: 1px solid rgba(182, 154, 255, 0.35);
+            border-radius: 12px;
+            padding: 10px 18px;
+
+            cursor: pointer;
+            transition: all 0.25s ease;
+            backdrop-filter: blur(6px);
+        }
+
+        .download-report-btn:hover {
+            background: linear-gradient(
+                135deg,
+                rgba(173, 0, 200, 0.5),
+                rgba(68, 23, 0, 0.6)
+            );
+            box-shadow: 0 0 18px rgba(182, 154, 255, 0.35);
+            transform: translateY(-1px);
+        }
+
+        .file-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        }
+
+        .file-meta {
+        max-width: 70%;
+        }
+
+        .report-actions {
+        margin-left: auto;
+        }
+
+        /* Button polish (won’t break JS) */
+        .download-report-btn {
+        background: transparent;
+        border: 1px solid #B69AFF;
+        color: #B69AFF;
+
+        padding: 12px 20px;
+        border-radius: 14px;
+
+        font-family: "Space Mono", monospace;
+        font-size: 0.9rem;
+
+        cursor: pointer;
+        transition: all 0.25s ease;
+        }
+
+        .download-report-btn:hover {
+        background: #B69AFF;
+        color: #0F0C1B;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(182, 154, 255, 0.35);
+        }
+
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- File Overview -->
+
+
+    <div class="card">
+        <div class="file-header">
+
+            <div class="file-meta">
+                <h1>Document Analysis</h1>
+                <p class="meta">
+                    <strong>File:</strong> {{ file_info.name }}<br>
+                    <strong>Type:</strong> {{ file_info.type }}<br>
+                    {% if file_info.rows %}
+                        <strong>Rows:</strong> {{ file_info.rows }}<br>
+                    {% endif %}
+                </p>
+            </div>
+
+            <div class="report-actions">
+                <button id="downloadReportBtn" class="download-report-btn">
+                    ⬇ Download Report
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <!-- High-Level Summary -->
+    <div class="card">
+        <h2>Summary</h2>
+        <div class="summary-toggle">
+
+            <div class="summary-tabs">
+                <button
+                    class="summary-tab active"
+                    data-type="abstractive"
+                    onclick="switchSummary(this, 'abstractive')"
+                >
+                    Abstractive
+                </button>
+                <button
+                    class="summary-tab"
+                    data-type="extractive"
+                    onclick="switchSummary(this, 'extractive')"
+                >
+                    Extractive
+                </button>
+            </div>
+            <div class="summary-divider"></div>
+
+
+        </div>
+        <div id="abstractive-summary" class="summary-text" style="color: white;">
+            {{ summaries.abstractive }}
+        </div>
+        <div id="extractive-summary" class="summary-text" style="display:none; color: white;">
+            <ul>
+                {% for s in summaries.extractive %}
+                    <li>{{ s }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+
+    <!-- Insights -->
+
+    <div class="card">
+        <h2>Insights</h2>
+
+        <div class="insights-row">
+
+            <!-- Topics -->
+            <div class="chart-column">
+                <h6 class="chart-title">Detected Topics</h6>
+                <div class="chart-box">
+                    <canvas id="topicChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Sentiment -->
+            <div class="chart-column">
+                <h6 class="chart-title">Sentiment Analysis</h6>
+                <div class="chart-box">
+                    <canvas id="sentimentChart"></canvas>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+    <!-- Word Cloud -->
+    <div class="card">
+        <h2>Key Terms</h2>
+        <!-- <img src="{{ wordcloud_url }}" alt="Word Cloud" class="wordcloud"> -->
+        <img id="wordcloud-img" src="{{ wordcloud_url }}" alt="Word Cloud" style="max-width:100%;border-radius: 15px;">
+
+    </div>
+
+</div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+
+
+    <script>
+    /* ---------- Summary Toggle ---------- */
+    function showSummary(type) {
+        const abs = document.getElementById("abstractive-summary");
+        const ext = document.getElementById("extractive-summary");
+        if (!abs || !ext) return;
+
+        abs.style.display = type === "abstractive" ? "block" : "none";
+        ext.style.display = type === "extractive" ? "block" : "none";
+    }
+
+    /* ---------- Data ---------- */
+    const topicLabels = {{ topic_data["labels"] | tojson }};
+    const topicValues = {{ topic_data["values"] | tojson }};
+    const topicKeywords = {{ topic_data["keywords"] | tojson }};
+    const sentimentValues = {{ sentiment_data["values"] | tojson }};
+
+
+    /* ---------- Topic Chart ---------- */
+    if (topicLabels.length && topicValues.length) {
+        new Chart(document.getElementById("topicChart"), {
+            type: "bar",
+            data: {
+                labels: topicLabels,
+                datasets: [{
+                    label: "Topic Probability",
+                    data: topicValues,
+                    backgroundColor: "#4c72b0"
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            afterLabel: (ctx) =>
+                                topicKeywords[ctx.dataIndex]?.join(", ") || ""
+                        }
+                    },
+                    legend: {
+                        labels: {
+                            color: "white",
+                            font: {
+                                family: "Space Mono",
+                                size: 12
+                            }
+                        }
+                    }
+                },
+                animation: {
+                    duration: 1400,
+                    easing: 'easeOutCubic'
+                }
+            }
+        });
+    }
+
+    /* ---------- Sentiment Chart ---------- */
+    console.log("Sentiment values:", sentimentValues);
+    console.log("Type:", typeof sentimentValues);
+
+    if (sentimentValues.length) {
+        new Chart(document.getElementById("sentimentChart"), {
+            type: "doughnut",
+            data: {
+                labels: ["Positive", "Neutral", "Negative"],
+                datasets: [{
+                    data: sentimentValues,
+                    backgroundColor: ["#4caf50", "#fbc02d", "#e53935"]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: {
+                    duration: 1400,
+                    easing: 'easeOutCubic'
+                },
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: "white",
+                            font: {
+                                family: "Space Mono",
+                                size: 12
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    function switchSummary(tab, type) {
+        // Toggle content
+        const abs = document.getElementById("abstractive-summary");
+        const ext = document.getElementById("extractive-summary");
+
+        if (!abs || !ext) return;
+
+        abs.style.display = type === "abstractive" ? "block" : "none";
+        ext.style.display = type === "extractive" ? "block" : "none";
+
+        // Toggle active tab
+        document.querySelectorAll(".summary-tab").forEach(t =>
+            t.classList.remove("active")
+        );
+        tab.classList.add("active");
+    }
+
+    function canvasToImage(canvasId) {
+        const canvas = document.getElementById(canvasId);
+        return canvas ? canvas.toDataURL("image/png") : null;
+    }
+
+    async function imageToDocxImage(dataUrl, maxWidth = 500) {
+        const img = new Image();
+        img.src = dataUrl;
+
+        await new Promise(resolve => (img.onload = resolve));
+
+        const aspectRatio = img.height / img.width;
+        const height = Math.round(maxWidth * aspectRatio);
+
+        const res = await fetch(dataUrl);
+        const blob = await res.blob();
+        const buffer = await blob.arrayBuffer();
+
+        return new docx.ImageRun({
+            data: buffer,
+            transformation: {
+                width: maxWidth,
+                height
+            }
+        });
+    }
+
+
+
+
+    document.getElementById("downloadReportBtn").addEventListener("click", async () => {
+
+        const {
+            Document,
+            Packer,
+            Paragraph,
+            TextRun,
+            HeadingLevel
+        } = docx;
+
+        /* ----------- Extract text from UI ----------- */
+        const abstractiveText =
+            document.getElementById("abstractive-summary")?.innerText || "";
+
+        const extractiveItems = Array.from(
+            document.querySelectorAll("#extractive-summary li")
+        ).map(li => li.innerText);
+
+        /* ----------- Capture images ----------- */
+        const topicChartImg = canvasToImage("topicChart");
+        const sentimentChartImg = canvasToImage("sentimentChart");
+        const wordcloudImg = document.getElementById("wordcloud-img")?.src;
+
+        /* ----------- Build document content ----------- */
+        const children = [
+
+            /* Title */
+            new Paragraph({
+                text: "Narrative Nexus – Analysis Report",
+                heading: HeadingLevel.TITLE,
+                spacing: { after: 400 }
+            }),
+
+            new Paragraph({
+                children: [
+                    new TextRun({
+                        text: "Automated insight report generated from uploaded content.",
+                        italics: true
+                    })
+                ],
+                spacing: { after: 600 }
+            }),
+
+            /* Abstractive Summary */
+            new Paragraph({
+                text: "Abstractive Summary",
+                heading: HeadingLevel.HEADING_1,
+                spacing: { after: 200 }
+            }),
+
+            new Paragraph({
+                children: [
+                    new TextRun({
+                        text: abstractiveText
+                    })
+                ],
+                spacing: { after: 400 }
+            }),
+
+            /* Extractive Summary */
+            new Paragraph({
+                text: "Extractive Summary",
+                heading: HeadingLevel.HEADING_1,
+                spacing: { after: 200 }
+            }),
+        ];
+
+        /* Bullet points for extractive summary */
+        extractiveItems.forEach(point => {
+            children.push(
+                new Paragraph({
+                    text: point,
+                    bullet: { level: 0 },
+                    spacing: { after: 120 }
+                })
+            );
+        });
+
+        /* ----------- Charts ----------- */
+        if (topicChartImg) {
+            children.push(
+                new Paragraph({
+                    text: "Detected Topics",
+                    heading: HeadingLevel.HEADING_1,
+                    spacing: { before: 400, after: 200 }
+                }),
+                new Paragraph({
+                    children: [await imageToDocxImage(topicChartImg, 500)],
+                    spacing: { after: 400 }
+                })
+            );
+        }
+
+        if (sentimentChartImg) {
+            children.push(
+                new Paragraph({
+                    text: "Sentiment Analysis",
+                    heading: HeadingLevel.HEADING_1,
+                    spacing: { before: 400, after: 200 }
+                }),
+                new Paragraph({
+                    children: [await imageToDocxImage(sentimentChartImg, 450)],
+                    spacing: { after: 400 }
+                })
+            );
+        }
+
+        /* ----------- Word Cloud ----------- */
+        if (wordcloudImg) {
+            children.push(
+                new Paragraph({
+                    text: "Key Terms & Concepts",
+                    heading: HeadingLevel.HEADING_1,
+                    spacing: { before: 400, after: 200 }
+                }),
+                new Paragraph({
+                    children: [await imageToDocxImage(wordcloudImg, 500)],
+                    spacing: { after: 300 }
+                })
+            );
+        }
+
+        /* ----------- Finalize document ----------- */
+        const doc = new Document({
+            sections: [{
+                properties: {},
+                children
+            }]
+        });
+
+        const blob = await Packer.toBlob(doc);
+        saveAs(blob, "NarrativeNexus_Report.docx");
+    });
+
+
+    </script>
+
+</body>
+</html>
