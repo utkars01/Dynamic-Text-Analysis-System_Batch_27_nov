@@ -85,7 +85,6 @@ streamlit run app.py
 4. Stakeholder Reporting: Create professional PDF/Word reports for owners or investors with one click.
 5. Crisis Detection: Instantly flag negative words like "spoiled" or "rude" before they hurt your reputation.
 
-Marketing Insights: Find glowing customer quotes to use as testimonials on social media
 ## 🤝 Contributing
 1. Fork the Project.
 2. Create a Feature Branch:
