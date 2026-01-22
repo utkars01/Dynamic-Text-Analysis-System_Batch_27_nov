@@ -1,44 +1,4 @@
-# Python cache and compiled files
 __pycache__/
-*.py[cod]
-*.pyo
-*.so
-
-# Jupyter Notebook checkpoints
 .ipynb_checkpoints/
-
-# Virtual environments
-venv/
-env/
-.venv/
-ENV/
-
-# Streamlit cache
-.streamlit/
-
-# Model files (large binaries)
-*.h5
-*.pkl
-*.joblib
-*.model
-
-# Data files
-*.csv
-*.tsv
-*.json
-*.xlsx
-*.db
-
-# Logs
-*.log
-
-# OS-specific files
-.DS_Store
-Thumbs.db
-
-# Reports and generated docs
-*.docx
-*.pdf
-
-# Node / frontend (if any)
-node_modules/
+.env
+*.pyc
